@@ -25,6 +25,10 @@ app.get('/', (req, res) => {
 res.render('main');
 });
 
+app.get('/posts/new', (req, res) => {
+    res.render('posts-new');
+});
+
 //Makes the app listen to port 3000
 app.listen(port, () => console.log(`App listening to port ${port}`));
 
