@@ -1,6 +1,16 @@
+
+
 const express = require('express');
 var exphbs = require('express-handlebars');
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended : false}));
+
+require('./data/messageboard-db');
+require('./controllers/posts') (app);
+
+
+
 const port = 3000;
 
 var handlebars = exphbs.create({
@@ -21,6 +31,9 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static('public'))
 
+
+
+
 app.get('/', (req, res) => {
 res.render('main');
 });
@@ -29,6 +42,9 @@ app.get('/posts/new', (req, res) => {
     res.render('posts-new');
 });
 
+
 //Makes the app listen to port 3000
 app.listen(port, () => console.log(`App listening to port ${port}`));
+
+
 
