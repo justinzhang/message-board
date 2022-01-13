@@ -1,13 +1,18 @@
 
-
+const Post = require('./models/post');
 const express = require('express');
 var exphbs = require('express-handlebars');
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({extended : false}));
 
 require('./data/messageboard-db');
-require('./controllers/posts') (app);
+
+const app = express();
+
+//middleware
+app.use(express.json());
+app.use(express.urlencoded({extended : false}));
+app.use(express.static('public'))
+
+
 
 
 
@@ -29,18 +34,17 @@ var handlebars = exphbs.create({
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
-app.use(express.static('public'))
 
 
 
 
-app.get('/', (req, res) => {
-res.render('main');
-});
 
-app.get('/posts/new', (req, res) => {
-    res.render('posts-new');
-});
+
+
+require('./controllers/posts') (app);
+
+
+
 
 
 //Makes the app listen to port 3000
