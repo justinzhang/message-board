@@ -38,7 +38,14 @@ module.exports = (app) => {
         console.log(err.message);
       });
   });
-      // LOOK UP THE POST
+  
+  app.get('/sub/:subreddit', (req, res) => {
+    Post.find({ subreddit: req.params.subreddit }).lean()
+    .then((posts) => res.render('posts-index', { posts }))
+    .catch((err) => {
+      console.log(err);
+    });
+  });
     
   
   };
